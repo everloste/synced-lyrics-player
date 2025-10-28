@@ -24,7 +24,7 @@ async function fileUpdated(this: HTMLInputElement, ev: Event) {
 		au.src = audio_url; au.play(); au.pause();
 
 		// Read audio metadata
-		const audio_metadata = await parseBlob(this.files![0]) as IAudioMetadata;
+		const audio_metadata = await parseBlob(this.files![0], {duration: true}) as IAudioMetadata;
 
 		// Search for synced lyrics online
 		const search_term = `${audio_metadata.common.artist}%20${audio_metadata.common.title}`;

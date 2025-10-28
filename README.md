@@ -1,0 +1,1 @@
+# a synced lyrics player demo

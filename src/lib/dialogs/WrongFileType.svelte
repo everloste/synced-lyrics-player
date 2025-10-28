@@ -1,6 +1,6 @@
 <dialog id="wrong-file-type-dialog" closedby="any">
     <p>
-        The selected file is not of an audio format
+        The selected file does not appear to be an audio file
     </p>
 </dialog>
 

@@ -29,10 +29,12 @@ async function fileUpdated(this: HTMLInputElement, ev: Event) {
 		// Search for synced lyrics online
 		const search_term = `${audio_metadata.common.artist}%20${audio_metadata.common.title}`;
 		const lrclib_response = await fetch(`https://lrclib.net/api/search?q=${search_term}`);
-		const lrclib_results = await lrclib_response.json() as Array<{name: string, syncedLyrics: string}>;
+		const lrclib_results = await lrclib_response.json() as Array<{name: string, syncedLyrics: string, duration: number}>;
 
 		// Find song lyrics in results
-		const song_object = lrclib_results.find((value) => value.name == audio_metadata.common.title);
+		const song_object = lrclib_results.find(
+			(value) => (value.name == audio_metadata.common.title && Math.round(value.duration) == Math.round(audio_metadata.format.duration!))
+		);
 
 		// Warn if lyrics not found
 		if (!song_object || song_object.syncedLyrics == null) {

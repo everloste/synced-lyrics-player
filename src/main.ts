@@ -4,6 +4,7 @@ import { type IAudioMetadata, parseBlob } from "music-metadata";
 import Lyrics from './lib/Lyrics.svelte';
 import { Vibrant } from "node-vibrant/browser";
 
+let interval_id = -1;
 
 async function fileUpdated(this: HTMLInputElement, ev: Event) {
 	console.log(this.files);
@@ -17,6 +18,7 @@ async function fileUpdated(this: HTMLInputElement, ev: Event) {
 
 		// Remove existing lyrics
 		document.getElementById('lyrics')!.innerHTML = "";
+		if (interval_id !== -1) clearInterval(interval_id);
 
 		// Set audio file to play
 		const audio_url = URL.createObjectURL(this.files![0]);
@@ -64,7 +66,7 @@ async function fileUpdated(this: HTMLInputElement, ev: Event) {
 				props: lyrics_processed
 			});
 
-			setInterval(updateLyrics, 25, au, lyrics_processed, lrael);
+			interval_id = setInterval(updateLyrics, 25, au, lyrics_processed, lrael);
 		}
 
 		if (audio_metadata.common.picture) {

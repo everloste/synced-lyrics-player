@@ -33,7 +33,7 @@ async function fileUpdated(this: HTMLInputElement, ev: Event) {
 
 		// Find song lyrics in results
 		const song_object = lrclib_results.find(
-			(value) => (value.name == audio_metadata.common.title && Math.round(value.duration) == Math.round(audio_metadata.format.duration!))
+			(value) => (value.name == audio_metadata.common.title && Math.abs(value.duration - audio_metadata.format.duration!) < 1.5)
 		);
 
 		// Warn if lyrics not found

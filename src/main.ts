@@ -48,7 +48,12 @@ async function fileUpdated(this: HTMLInputElement, ev: Event) {
 		else {
 			const lyrics_object = song_object.syncedLyrics as string;
 
-			let lyrics_processed: Array<{time: number, line: string}> = [];
+			let lyrics_processed: Array<{time: number, line: string}> = [
+				{
+					time: 0,
+					line: ""
+				}
+			];
 			lyrics_object.trim().split("\n").forEach(line_raw => {
 				const time = (parseInt(line_raw.split("]")[0].slice(1).split(":")[0]) * 60) + (parseFloat(line_raw.split("]")[0].slice(1).split(":")[1]))
 				lyrics_processed.push(

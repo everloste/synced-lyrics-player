@@ -8,8 +8,10 @@
 		document.getElementById("open-file-link")!.addEventListener("click", () => {
 			document.getElementById("song-source")!.click();
 		});
-		document.getElementById("open-file-link")!.addEventListener("keydown", () => {
-			document.getElementById("song-source")!.click();
+		document.getElementById("open-file-link")!.addEventListener("keypress", (ev) => {
+			if (ev.key === " " || ev.key === "Enter") {
+				document.getElementById("song-source")!.click();
+			}
 		});
 		(document.getElementById("song-info")! as HTMLDialogElement).show();
 	});

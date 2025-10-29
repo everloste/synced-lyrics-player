@@ -134,9 +134,15 @@ async function bytesToBase64DataUrl(bytes: Uint8Array, type = "application/octet
 const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 
 function updateLyrics(au: HTMLAudioElement, lrcs: Array<{time: number, line: string}>, lyrics_element: Lyrics) {
-	const current_lyric = lrcs.findIndex(
-		(value, index) => (lrcs[clamp(index+1, 0, lrcs.length-1)].time > au.currentTime)
-	);
+	let current_lyric = -1;
+	if (au.currentTime >= lrcs[lrcs.length - 1].time) {
+		current_lyric = lrcs.length - 1;
+	}
+	else {
+		current_lyric = lrcs.findIndex(
+			(value, index) => (lrcs[clamp(index+1, 0, lrcs.length-1)].time > au.currentTime)
+		);
+	}
 	lyrics_element.updateLine(current_lyric);
 }
 

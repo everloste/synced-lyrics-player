@@ -6,20 +6,23 @@
 	let current_line: number = $state(0);
 
 	export function updateLine(i: number) {
-		if (i !== current_line || i === 0) {
+		if (current_line !== -1 && i !== current_line && i < lyrics_array.length) {
+
+			// Unhighlight previous line(s)
 			if (i === current_line + 1) {
 				document.getElementById(`line-${i-1}`)!.classList.remove("current");
 			}
 			else {
-				if (document.getElementsByClassName("current")) {
+				if (document.getElementsByClassName("current").length !== 0) {
 					Array.prototype.forEach.call(document.getElementsByClassName("current"), function(element: HTMLElement) {
 						element.classList.remove("current");
 					});
 				}
 			}
+			
+			// Set new current line
 			current_line = i;
 			document.getElementById(`line-${current_line}`)!.classList.add("current");
-
 			document.getElementById(`line-${current_line}`)!.scrollIntoView({
 				behavior: "smooth",
 				block: "center"
@@ -53,7 +56,7 @@
 		height: 100%;
 		overflow: scroll;
 
-		padding: 25vh 1em;
+		padding: 30vh 1em;
 
 		scrollbar-width: none; /* Firefox */
 		-ms-overflow-style: none;  /* IE 10+ */

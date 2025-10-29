@@ -8,6 +8,9 @@
 		document.getElementById("open-file-link")!.addEventListener("click", () => {
 			document.getElementById("song-source")!.click();
 		});
+		document.getElementById("open-file-link")!.addEventListener("keydown", () => {
+			document.getElementById("song-source")!.click();
+		});
 		(document.getElementById("song-info")! as HTMLDialogElement).show();
 	});
 </script>
@@ -26,7 +29,7 @@
 			<h4 id="song-artist" hidden>
 				Artist
 			</h4>
-			<a id="open-file-link">
+			<a id="open-file-link" role="link" tabindex="0">
 				Open a song file...
 			</a>
 		</div>
